@@ -1,24 +1,8 @@
-<?php 
+<?php
+include_once("backend/ConfigAccess.php"); 
 $page = str_replace("/","",$_SERVER['PHP_SELF']); 
 $title = getTitleAndTab($page)[0];
 $tabNumber = getTitleAndTab($page)[1];
-
-function getTitleAndTab($page){
-    switch ($page){
-        case 'index.php':
-            return ['Mantis Quick Editor',0];
-        break;
-        case 'weeklyreport.php':
-            return ['Weekly Report',1];
-        break;
-        case 'monthlyreport.php':
-            return ['Monthly Report',2];
-        break;
-    }
-}
-function setActiveTab($tabNumber,$tabToCheck){
-    return $tabNumber === $tabToCheck?"class='active'":"";
-}
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,7 +40,7 @@ function setActiveTab($tabNumber,$tabToCheck){
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="<?php echo strtolower(getCurrentTheme());?>" data-image="assets/img/sidebar-5.jpg">
 
     <!--
 
@@ -106,6 +90,27 @@ function setActiveTab($tabNumber,$tabToCheck){
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#"><?php echo $title;?></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <p>
+                                        Theme
+                                        <b class="caret"></b>
+                                    </p>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li <?php echo setActiveTheme(0);?>><a href="#" onclick="saveNewTheme(this)">Blue</a></li>
+                                <li <?php echo setActiveTheme(1);?>><a href="#" onclick="saveNewTheme(this)">Azure</a></li>
+                                <li <?php echo setActiveTheme(2);?>><a href="#" onclick="saveNewTheme(this)">Green</a></li>
+                                <li <?php echo setActiveTheme(3);?>><a href="#" onclick="saveNewTheme(this)">Red</a></li>
+                                <li <?php echo setActiveTheme(4);?>><a href="#" onclick="saveNewTheme(this)">Orange</a></li>
+                                <li <?php echo setActiveTheme(5);?>><a href="#" onclick="saveNewTheme(this)">Purple</a></li>
+                                <li <?php echo setActiveTheme(6);?>><a href="#" onclick="saveNewTheme(this)">Gray</a></li>
+                              </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
